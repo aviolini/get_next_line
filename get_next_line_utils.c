@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/30 16:03:45 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/30 18:56:39 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ char	*ft_newline(char **line, char *ptr, int r)
 	}
 	newline[y] = '\0';
 	if (y != i)
+	{
 		free(*line);
+		*line = NULL;
+	}
 	return (newline);
 }
 

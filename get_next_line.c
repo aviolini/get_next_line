@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:58 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/30 16:17:03 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/30 19:06:32 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,22 @@ int   get_next_line(int fd, char **line)
   x = 0;
   if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-    if (ft_strlen(index) != 0)
-        x = ft_refresh_index(line, index);
-
-    if (x == 1)
-		return (1);
-	//ft_clean(index);
+    //if (ft_strlen(index) != 0)
+    if (index[0] != '\0')
+        if ((x = ft_refresh_index(line, index)) == 1)
+		  return (1);
+	ft_clean(index);
     while (x == 0)
-	{
 		x = ft_read(fd, line, index);
-	}
     if (x == -2)
+    {
+        if (!*line)
+        {
+            *line = (char *)malloc(sizeof(char));
+             line[0][0] = '\0';
+        }
         x = 0;
-
+    }
     return (x);
 }
 
@@ -59,30 +62,18 @@ int   ft_read(int fd, char **line, char *index)
 	  	return (-1);
 	ptr[r] = '\0';
 		if (r == 0)
-        {
-            if (!*line)
-            {
-                *line = (char *)malloc(sizeof(char));
-          	     line[0][0] = '\0';
-            }
             return (-2);
-        }
-        x = ft_strchr(ptr);
-	  	if (x == -1)
+	  if ((x = ft_strchr(ptr)) == -1)
 	  	{
 			*line = ft_newline(line, ptr, r);
 			ft_clean(ptr);
+            return (0);
 	  	}
-	  	else
-	  	{
 			*line = ft_newline(line, ptr, x);
-			x = x + 1;
-			ft_index(index, ptr, x);
-			return (1);
-		}
-	}
-
-  return (0);
+			ft_index(index, ptr, x + 1);
+			break;
+    }
+    return (1);
 }
 
 
@@ -90,12 +81,11 @@ int ft_strchr(char *str)
 {
 	int i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 			if(str[i] == '\n')
 				return (i);
-			i++;
 	}
 	return (-1);
 }
