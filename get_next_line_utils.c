@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/30 18:56:39 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/30 19:40:13 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_newline(char **line, char *ptr, int r)
 	char *newline;
 	int tot;
 
-	i = 0;
+	i = -1;
 	y = 0;
 	if (*line)
 	{
@@ -28,23 +28,15 @@ char	*ft_newline(char **line, char *ptr, int r)
 	}
 	else
 		newline = (char *)malloc(sizeof(char) * (r + 1));
-	while(i < y)
-	{
+	while(++i < y)
 		newline[i] =  line[0][i];
-		i++;
-	}
 	i = 0;
 	tot = r + y;
 	while(y < tot)
-	{
 		newline[y++] = ptr[i++];
-	}
 	newline[y] = '\0';
 	if (y != i)
-	{
 		free(*line);
-		*line = NULL;
-	}
 	return (newline);
 }
 
@@ -63,8 +55,7 @@ int ft_refresh_index(char **line, char *index)
 	else
 	{
 		*line = ft_newline(line, index, x);
-		x = x + 1;
-		ft_index(index, index, x);
+		ft_index(index, index, x + 1);
 		return (1);
 	}
 	return (0);

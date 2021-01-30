@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:58 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/30 19:06:32 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/30 19:15:56 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int   get_next_line(int fd, char **line)
     //if (ft_strlen(index) != 0)
     if (index[0] != '\0')
         if ((x = ft_refresh_index(line, index)) == 1)
-		  return (1);
-	ft_clean(index);
+		      return (1);
+ft_clean(index);
     while (x == 0)
 		x = ft_read(fd, line, index);
     if (x == -2)
