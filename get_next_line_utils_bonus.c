@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 16:41:45 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:17:19 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ t_list *ft_checkfd(t_list **lst, int fd)
 
 	if(*lst)
 	{
-		while ((*lst)->next)
+		while (*lst)
 		{
 			if((*lst)->fd == fd)
 				return (*lst);
-	 		(*lst) = (*lst)->next;
+			(*lst) = (*lst)->next;
 		}
 		newlist = (t_list *)malloc(sizeof(t_list));
 		newlist->fd = fd;
@@ -34,6 +34,31 @@ t_list *ft_checkfd(t_list **lst, int fd)
 	(*lst)->next = NULL;
 	(*lst)->fd = fd;
 	return (*lst);
+}
+
+void 	ft_clearone(t_list *lst)
+{
+	t_list *ptr;
+
+		ptr = lst->next;
+		lst->next = lst;
+		free (ptr);
+		return;
+}
+
+int 	ft_count(t_list **lst)
+{
+	int i;
+
+	i = 1;
+	if (!(*lst))
+		return (0);
+	while ((*lst)->next)
+	{
+		*lst = (*lst)->next;
+		i++;
+	}
+	return i;
 }
 
 char	*ft_newline(char **line, char *ptr, int r)

@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:58 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 16:36:20 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:19:54 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 int   get_next_line(int fd, char **line)
 {
-	static char index[BUFFER_SIZE + 1];
 	static t_list **lst;
-	//static t_list *lst;
 	int x;
+
+	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+		  return (-1);
 	if (!lst)
 	{
 		lst = (t_list **)malloc(sizeof(t_list));
-		//lst->next = NULL;
 		*lst = NULL;
 	}
-	printf ("*lst %p\n", *lst);
-	printf ("lst %p\n", lst);
-//	printf ("lst->next %p\n", lst->next);
   x = 0;
-  if (fd < 0 || !line || BUFFER_SIZE <= 0)
-		return (-1);
   *lst = ft_checkfd(lst,fd);
-    if (index[0] != '\0')
-        if ((x = ft_refresh_index(line, index)) == 1)
+	if ((*lst)->content[0] != '\0')
+		if ((x = ft_refresh_index(line, ((*lst)->content))) == 1)
 		      return (1);
-ft_clean(index);
+	ft_clean((*lst)->content);
     while (x == 0)
-		x = ft_read(fd, line, index);
-    if (x == -2)
+		x = ft_read((*lst)->fd, line, (*lst)->content);
+	if (x == -2)
     {
+		if (ft_count(lst) == 1)
+			free(lst);
+		else
+			ft_clearone(*lst);
         if (!*line)
         {
             *line = (char *)malloc(sizeof(char));
@@ -46,7 +45,7 @@ ft_clean(index);
         }
         x = 0;
     }
-    return (x);
+	return (x);
 }
 
 void   ft_index(char *index, char *ptr, int x)

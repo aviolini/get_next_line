@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:53 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 16:16:29 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 18:52:24 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 
 typedef struct s_list
 {
-        char			content[BUFFER_SIZE + 1];
+      char		content[BUFFER_SIZE + 1];
 		int 			fd;
 		struct s_list	*next;
-}	t_list;
+} t_list;
 
 int		get_next_line(int fd, char **line);
 void	ft_index(char *index, char *ptr, int x);
@@ -37,5 +37,6 @@ char	*ft_newline(char **line, char *ptr, int r);
 int		ft_refresh_index(char **line, char *index);
 void    ft_clean(char *ptr);
 t_list	*ft_checkfd(t_list **lst, int fd);
-
+void 	ft_clearone(t_list *lst);
+int 	ft_count(t_list **lst);
 #endif
