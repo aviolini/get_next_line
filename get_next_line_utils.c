@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 10:04:30 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:49:18 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_newline(char **line, char *ptr, int r)
 {
-	int i;
-	int y;
-	char *newline;
-	int tot;
+	int		i;
+	int		y;
+	char	*newline;
+	int		tot;
 
 	i = -1;
 	y = 0;
@@ -28,11 +28,11 @@ char	*ft_newline(char **line, char *ptr, int r)
 	}
 	else
 		newline = (char *)malloc(sizeof(char) * (r + 1));
-	while(++i < y)
-		newline[i] =  line[0][i];
+	while (++i < y)
+		newline[i] = line[0][i];
 	i = 0;
 	tot = r + y;
-	while(y < tot)
+	while (y < tot)
 		newline[y++] = ptr[i++];
 	newline[y] = '\0';
 	if (y > i)
@@ -40,7 +40,7 @@ char	*ft_newline(char **line, char *ptr, int r)
 	return (newline);
 }
 
-int ft_refresh_index(char **line, char *index)
+int		ft_refresh_index(char **line, char *index)
 {
 	int x;
 	int y;
@@ -61,11 +61,11 @@ int ft_refresh_index(char **line, char *index)
 	return (0);
 }
 
-void ft_clean(char *ptr)
+void	ft_clean(char *ptr)
 {
 	int i;
 
 	i = 0;
-	while(ptr[i])
+	while (ptr[i])
 		ptr[i++] = '\0';
 }
