@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/30 19:40:13 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 10:04:30 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_newline(char **line, char *ptr, int r)
 	while(y < tot)
 		newline[y++] = ptr[i++];
 	newline[y] = '\0';
-	if (y != i)
+	if (y > i)
 		free(*line);
 	return (newline);
 }
