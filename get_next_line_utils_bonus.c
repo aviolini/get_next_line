@@ -1,72 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/02/01 09:39:48 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/01/31 19:49:18 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
-
-t_list *ft_checkfd(t_list **lst, int fd)
-{
-	t_list *newlist;
-
-	if(*lst)
-	{
-		while (*lst)
-		{
-			if((*lst)->fd == fd)
-				return (*lst);
-			(*lst) = (*lst)->next;
-		}
-		newlist = (t_list *)malloc(sizeof(t_list));
-		newlist->fd = fd;
-		newlist->next = NULL;
-		(*lst)->next = newlist;
-		return (newlist);
-	}
-	(*lst) = (t_list *)malloc(sizeof(t_list));
-	(*lst)->next = NULL;
-	(*lst)->fd = fd;
-	return (*lst);
-}
-
-void 	ft_clearone(t_list *lst)
-{
-	t_list *ptr;
-
-		ptr = lst->next;
-		lst->next = lst;
-		free (lst);
-		return;
-}
-
-int 	ft_count(t_list **lst)
-{
-	int i;
-
-	i = 1;
-	if (!(*lst))
-		return (0);
-	while ((*lst)->next)
-	{
-		*lst = (*lst)->next;
-		i++;
-	}
-	return i;
-}
+#include "get_next_line.h"
 
 char	*ft_newline(char **line, char *ptr, int r)
 {
-	int i;
-	int y;
-	char *newline;
-	int tot;
+	int		i;
+	int		y;
+	char	*newline;
+	int		tot;
 
 	i = -1;
 	y = 0;
@@ -77,11 +28,11 @@ char	*ft_newline(char **line, char *ptr, int r)
 	}
 	else
 		newline = (char *)malloc(sizeof(char) * (r + 1));
-	while(++i < y)
-		newline[i] =  line[0][i];
+	while (++i < y)
+		newline[i] = line[0][i];
 	i = 0;
 	tot = r + y;
-	while(y < tot)
+	while (y < tot)
 		newline[y++] = ptr[i++];
 	newline[y] = '\0';
 	if (y > i)
@@ -89,7 +40,7 @@ char	*ft_newline(char **line, char *ptr, int r)
 	return (newline);
 }
 
-int ft_refresh_index(char **line, char *index)
+int		ft_refresh_index(char **line, char *index)
 {
 	int x;
 	int y;
@@ -110,11 +61,11 @@ int ft_refresh_index(char **line, char *index)
 	return (0);
 }
 
-void ft_clean(char *ptr)
+void	ft_clean(char *ptr)
 {
 	int i;
 
 	i = 0;
-	while(ptr[i])
+	while (ptr[i])
 		ptr[i++] = '\0';
 }
