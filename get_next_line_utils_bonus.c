@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:55 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 19:17:19 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/02/01 09:39:48 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void 	ft_clearone(t_list *lst)
 
 		ptr = lst->next;
 		lst->next = lst;
-		free (ptr);
+		free (lst);
 		return;
 }
 

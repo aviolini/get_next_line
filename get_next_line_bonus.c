@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:58 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 19:19:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/02/01 09:39:50 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int   get_next_line(int fd, char **line)
 
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		  return (-1);
+		 *line = NULL;
 	if (!lst)
 	{
 		lst = (t_list **)malloc(sizeof(t_list));
@@ -34,10 +35,18 @@ int   get_next_line(int fd, char **line)
 		x = ft_read((*lst)->fd, line, (*lst)->content);
 	if (x == -2)
     {
-		if (ft_count(lst) == 1)
+	//	if (ft_count(lst) == 1)
+	//	{
+	//		free(*lst);
+//
+//			free(lst);
+//		}
+//		else
+			if (*lst)
+			//	ft_clearone(*lst);
+				free(*lst);
 			free(lst);
-		else
-			ft_clearone(*lst);
+			//ft_clearone(*lst);
         if (!*line)
         {
             *line = (char *)malloc(sizeof(char));
@@ -45,6 +54,12 @@ int   get_next_line(int fd, char **line)
         }
         x = 0;
     }
+	if(x == -1)
+	{
+		free(*lst);
+		free(lst);
+	}
+
 	return (x);
 }
 

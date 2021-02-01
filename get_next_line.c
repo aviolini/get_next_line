@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 10:27:58 by aviolini          #+#    #+#             */
-/*   Updated: 2021/01/31 19:48:01 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/02/01 09:34:15 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		get_next_line(int fd, char **line)
 	x = 0;
 	if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
+	*line = NULL;
 	if (index[0] != '\0')
 		if ((x = ft_refresh_index(line, index)) == 1)
 			return (1);
